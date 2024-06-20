@@ -174,9 +174,9 @@ const Jobs = () => {
         edges {
           node {
             frontmatter {
+              Date
               title
               company
-              location
               range
               url
             }

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
+import { graphql, useStaticQuery } from 'gatsby';
 import styled from 'styled-components';
-import { srConfig, email } from '@config';
+import { srConfig } from '@config';
 import sr from '@utils/sr';
 import { usePrefersReducedMotion } from '@hooks';
 
@@ -42,6 +43,26 @@ const StyledContactSection = styled.section`
 `;
 
 const Contact = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          email
+        }
+      }
+      markdownRemark(fileAbsolutePath: { regex: "/content/contact/" }) {
+        html
+        frontmatter {
+          title
+          buttonText
+        }
+      }
+    }
+  `);
+
+  const { email } = data.site.siteMetadata;
+  const { html, frontmatter } = data.markdownRemark;
+  const { title, buttonText } = frontmatter;
   const revealContainer = useRef(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -51,21 +72,15 @@ const Contact = () => {
     }
 
     sr.reveal(revealContainer.current, srConfig());
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <StyledContactSection id="contact" ref={revealContainer}>
-      <h2 className="numbered-heading overline">What’s Next?</h2>
-
-      <h2 className="title">Get In Touch</h2>
-
-      <p>
-        Although I’m not currently looking for any new opportunities, my inbox is always open.
-        Whether you have a question or just want to say hi, I’ll try my best to get back to you!
-      </p>
-
+      <h2 className="numbered-heading overline">What&apos;s Next?</h2>
+      <h2 className="title">{title}</h2>
+      <div dangerouslySetInnerHTML={{ __html: html }} />
       <a className="email-link" href={`mailto:${email}`}>
-        Say Hello
+        {buttonText}
       </a>
     </StyledContactSection>
   );

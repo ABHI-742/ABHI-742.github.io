@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useStaticQuery, graphql } from 'gatsby';
 import { StaticImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import { srConfig } from '@config';
@@ -18,6 +19,7 @@ const StyledAboutSection = styled.section`
     }
   }
 `;
+
 const StyledText = styled.div`
   ul.skills-list {
     display: grid;
@@ -46,6 +48,7 @@ const StyledText = styled.div`
     }
   }
 `;
+
 const StyledPic = styled.div`
   position: relative;
   max-width: 300px;
@@ -62,6 +65,7 @@ const StyledPic = styled.div`
     width: 100%;
     border-radius: var(--border-radius);
     background-color: var(--green);
+    transition: var(--transition);
 
     &:hover,
     &:focus {
@@ -83,7 +87,6 @@ const StyledPic = styled.div`
       border-radius: var(--border-radius);
       mix-blend-mode: multiply;
       filter: grayscale(100%) contrast(1);
-      transition: var(--transition);
     }
 
     &:before,
@@ -114,56 +117,37 @@ const StyledPic = styled.div`
 `;
 
 const About = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      markdownRemark(fileAbsolutePath: { regex: "/content/about/" }) {
+        frontmatter {
+          title
+          skills
+        }
+        html
+      }
+    }
+  `);
+
+  const { frontmatter, html } = data.markdownRemark;
+  const { title, skills } = frontmatter;
+
   const revealContainer = useRef(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
-    if (prefersReducedMotion) {
-      return;
+    if (!prefersReducedMotion) {
+      sr.reveal(revealContainer.current, srConfig());
     }
-
-    sr.reveal(revealContainer.current, srConfig());
-  }, []);
-
-  const skills = ['JavaScript (ES6+)', 'TypeScript', 'React', 'Eleventy', 'Node.js', 'WordPress'];
+  }, [prefersReducedMotion]);
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
-      <h2 className="numbered-heading">About Me</h2>
+      <h2 className="numbered-heading">{title}</h2>
 
       <div className="inner">
         <StyledText>
-          <div>
-            <p>
-              Hello! My name is Brittany and I enjoy creating things that live on the internet. My
-              interest in web development started back in 2012 when I decided to try editing custom
-              Tumblr themes — turns out hacking together a custom reblog button taught me a lot
-              about HTML &amp; CSS!
-            </p>
-
-            <p>
-              Fast-forward to today, and I’ve had the privilege of working at{' '}
-              <a href="https://us.mullenlowe.com/">an advertising agency</a>,{' '}
-              <a href="https://starry.com/">a start-up</a>,{' '}
-              <a href="https://www.apple.com/">a huge corporation</a>, and{' '}
-              <a href="https://scout.camd.northeastern.edu/">a student-led design studio</a>. My
-              main focus these days is building accessible, inclusive products and digital
-              experiences at <a href="https://upstatement.com/">Upstatement</a> for a variety of
-              clients.
-            </p>
-
-            <p>
-              I also recently{' '}
-              <a href="https://www.newline.co/courses/build-a-spotify-connected-app">
-                launched a course
-              </a>{' '}
-              that covers everything you need to build a web app with the Spotify API using Node
-              &amp; React.
-            </p>
-
-            <p>Here are a few technologies I’ve been working with recently:</p>
-          </div>
-
+          <div dangerouslySetInnerHTML={{ __html: html }} />
           <ul className="skills-list">
             {skills && skills.map((skill, i) => <li key={i}>{skill}</li>)}
           </ul>
@@ -173,7 +157,7 @@ const About = () => {
           <div className="wrapper">
             <StaticImage
               className="img"
-              src="../../images/me.jpg"
+              src="../../images/avatar.jpg"
               width={500}
               quality={95}
               formats={['AUTO', 'WEBP', 'AVIF']}

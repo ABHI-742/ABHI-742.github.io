@@ -1,11 +1,11 @@
 {
-  "name": "v4",
-  "description": "Personal Website V4",
+  "name": "v5",
+  "description": "Personal Website V5",
   "version": "1.0.0",
-  "author": "Brittany Chiang <brittany.chiang@gmail.com>",
+  "author": "Abhi Venkata Sri Krishna Devarayalu Anumanchi <aanumanc@gmu.edu>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bchiang7/v4"
+    "url": "git+https://github.com/ABHI-742/ABHI-742.github.io.git"
   },
   "keywords": [
     "gatsby"

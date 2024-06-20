@@ -1,26 +1,27 @@
 module.exports = {
-  email: 'brittany.chiang@gmail.com',
+  siteTitle: 'Abhi Venkata Sri Krishna Devarayalu Anumanchi | Software Developer',
+  siteDescription:
+    ' Abhi Venkata Sri Krishna Devarayalu Anumanchi pursuing a Masters degree in Computer Science from George Mason University',
+  siteKeywords:
+    'Abhi Venkata Sri Krishna Devarayalu, Software Developer, Software Engineer, Competitive Programmer, Java Developer, Applicatoin Developer, George Mason University, GMU, 1Stop.ai',
+  siteUrl: 'http://abhi-742.github.io/',
+  siteLanguage: 'en_US',
+  googleAnalyticsID: 'UA-45666519-2',
+  googleVerification: 'DCl7VAf9tcz6eD9gb67NfkNnJ1PKRNcg8qQiwpbx9Lk',
+  name: 'Abhi Venkata Sri Krishna Devarayalu Anumanchi',
+  location: 'George Mason University, Fairfax',
+  email: 'aanumanc@gmu.edu',
+  github: 'https://github.com/ABHI-742',
 
   socialMedia: [
     {
       name: 'GitHub',
-      url: 'https://github.com/bchiang7',
+      url: 'https://github.com/ABHI-742',
     },
-    {
-      name: 'Instagram',
-      url: 'https://www.instagram.com/bchiang7',
-    },
-    {
-      name: 'Twitter',
-      url: 'https://twitter.com/bchiang7',
-    },
+
     {
       name: 'Linkedin',
-      url: 'https://www.linkedin.com/in/bchiang7',
-    },
-    {
-      name: 'Codepen',
-      url: 'https://codepen.io/bchiang7',
+      url: 'https://www.linkedin.com/in/a-v-s-k-devarayalu-anumanchi-559323129/',
     },
   ],
 
@@ -34,12 +35,12 @@ module.exports = {
       url: '/#jobs',
     },
     {
-      name: 'Work',
+      name: 'Projects',
       url: '/#projects',
     },
     {
       name: 'Contact',
-      url: '/#contact',
+      url: '/#contact ',
     },
   ],
 
