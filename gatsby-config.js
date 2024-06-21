@@ -19,8 +19,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'Abhi Venkata Sri Krishna Devarayalu Anumanchi',
-        short_name: 'Abhi Venkata Sri Krishna Devarayalu Anumanchi',
+        name: 'Brittany Chiang',
+        short_name: 'Brittany Chiang',
         start_url: '/',
         background_color: config.colors.darkNavy,
         theme_color: config.colors.navy,
