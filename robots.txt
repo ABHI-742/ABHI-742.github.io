@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: http://abhi-742.github.io/sitemap-index.xml
+Sitemap: http://abhi-742.github.io/sitemap.xml
 Host: abhi-742.github.io
